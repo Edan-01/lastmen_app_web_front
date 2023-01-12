@@ -1,0 +1,443 @@
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group">
+        <h4 class="text-center">DETALLE VENTA</h4>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <form
+            method="post"
+            name="form_new_cliente_venta"
+            id="form_new_cliente_venta"
+          >
+            <input
+              type="hidden"
+              id="idcliente"
+              value="1"
+              name="idcliente"
+              required
+            />
+            <div class="row" >
+              <div style="display: grid;">
+                <input
+                  (click)="openListCliente(TemplateCliente)"
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  value="Seleccione Cliente"
+                />
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label>Nombre Completo</label>
+                  <input
+                    type="text"
+                    name="nom_cliente"
+                    id="nom_cliente"
+                    class="form-control"
+                    [(ngModel)]="clienteSelect.nombres + ' ' + clienteSelect.apellidos"
+                    required
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <div class="form-group">
+                  <label>Dni</label>
+                  <input
+                    type="number"
+                    name="dni_cliente"
+                    id="dni_cliente"
+                    class="form-control"
+                    [(ngModel)]="clienteSelect.dni"
+                    required
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label>Dirección</label>
+                  <input
+                    type="text"
+                    name="dir_cliente"
+                    id="dir_cliente"
+                    class="form-control"
+                    [(ngModel)]="clienteSelect.direccion"
+                    required
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <div class="form-group">
+                  <label>Celular</label>
+                  <input
+                    type="number"
+                    name="tel_cliente"
+                    id="tel_cliente"
+                    class="form-control"
+                    [(ngModel)]="clienteSelect.celular"
+                    required
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div id="div_registro_cliente" style="display: none">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <br />
+      <br />
+      <br />
+      <h4 class="text-center">DATOS DE LA VENTA</h4>
+      <br />
+      <br />
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <Table class="table table-bordered">
+              <Th
+                ><label><i class="fas fa-user"></i> VENDEDOR</label></Th
+              >
+              <td style="align-items: center;" >{{ usuario.nombres }} {{ usuario.apellidos }}</td>
+            </Table>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <div style="display: grid;">
+          <input
+            (click)="openListProducto(TemplateProducto)"
+            type="button"
+            class="btn btn-primary btn-sm float-end"
+            value="Seleccione producto"
+          />
+        </div>
+
+        <form [formGroup]="myForm">
+          <table class="table table-hover">
+            <thead class="bg-dark text-white">
+              <tr>
+                <th class="d-none">id detalle venta</th>
+                <th>Nombre Producto</th>
+                <th>Descripcion</th>
+                <th>Stock</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Descuento</th>
+                <th>Precio Total</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="detalle_venta">
+              <ng-container formArrayName="DetalleVentas">
+                <ng-container
+                  *ngFor="let d of DetalleVentas.controls; let i = index"
+                >
+                  <tr [formGroupName]="i">
+                    <td class="d-none">
+                      <input
+                        readonly
+                        type="text"
+                        class="form-control"
+                        formControlName="idDetalleVenta"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        readonly
+                        type="text"
+                        class="form-control"
+                        formControlName="nombre_producto"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        readonly
+                        type="text"
+                        class="form-control"
+                        formControlName="descripcion_producto"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        readonly
+                        type="text"
+                        class="form-control"
+                        formControlName="stock"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        (input)="changerValueFormArray(i)"
+                        type="text"
+                        class="form-control"
+                        formControlName="cantidad"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        readonly
+                        type="text"
+                        class="form-control"
+                        formControlName="precio_unitario"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        (input)="changerValueFormArray(i)"
+                        type="text"
+                        class="form-control"
+                        formControlName="descuento"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        readonly
+                        type="text"
+                        class="form-control"
+                        formControlName="precio_total"
+                      />
+                    </td>
+                    <td>
+                      <button
+                        (click)="removeElement(i)"
+                        class="btn btn-danger btn-sm"
+                      >
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+            </tbody>
+
+            <tfoot id="detalle_totales">
+              
+              <tr> 
+                <th></th>
+                <th colspan="6">
+                  <p class="text-end"><br>Precio Total</p>
+                </th>
+                <th class="text-end">{{ total_price }}</th>
+              </tr>
+            </tfoot>
+          </table>
+          <div style="text-align: center">
+            <div>
+              <a
+                (click)="procesarVenta()"
+                class="btn btn-success text-center"
+                id="btn_facturar_venta"
+                (click)="generarComprobante(templatecomprobante)"
+                ><i class="fas fa-save"></i> Generar Venta</a
+              >
+            </div>
+          </div>
+          <div>
+            <a
+              (click)="listVenta(templatelistaventas)"
+              class="btn btn-warning text-center"
+              id="btn_facturar_venta"
+              ><i class="fas fa-list"></i> Lista de Ventas</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- template lista clientes -->
+
+  <ng-template #TemplateCliente>
+    <div class="container mt-2">
+      <div class="input-group">
+        <legend>
+          <input
+            (click)="modalRef?.hide()"
+            type="button"
+            class="btn btn-danger btn-sm float-end"
+            value="X"
+          />
+        </legend>
+        <div class="input-group-text bg-white">
+          <i class="fas fa-search"></i>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          name="productos"
+          placeholder="Buscar por nombre..."
+          [(ngModel)]="filtro"
+        />
+      </div>
+    </div>
+    <div class="container mt-4">
+      <table class="table table-bordered table-striped table-responsive">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th hidden>CODIGO CLIENTE</th>
+            <th>Nombre / Razon Social</th>
+            <th>Ruc</th>
+            <th>DNI</th>
+            <th>Direccion</th>
+            <th>Celular</th>
+            <th hidden>EMAIL</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let d of clienteList
+                | paginate : { itemsPerPage: 5, currentPage: page };
+              let indice = index
+            "
+          >
+            <td>{{ indice + 1 }}</td>
+            <td hidden>{{ d.idCliente }}</td>
+            <td>{{ d.nombres }}</td>
+            <td>{{ d.apellidos }}</td>
+            <td>{{ d.dni }}</td>
+            <td>{{ d.direccion }}</td>
+            <td>{{ d.celular }}</td>
+
+            <td>
+              <button
+                type=""
+                style="margin-left: 2px; margin-right: 2px"
+                class="btn btn-sm btn-primary"
+                (click)="onChangeCliente(d)"
+              >
+                <label for=""> seleccionar</label>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <pagination-controls
+      (pageChange)="page = $event"
+      previousLabel="Anterior"
+      nextLabel="Siguiente"
+    >
+    </pagination-controls>
+  </ng-template>
+
+  <!-- template lista productos -->
+
+  <ng-template #TemplateProducto>
+    <div class="container mt-2">
+      <div class="input-group">
+        <legend>
+          <input
+            (click)="modalRef?.hide()"
+            type="button"
+            class="btn btn-danger btn-sm float-end"
+            value="X"
+          />
+        </legend>
+        <div class="input-group-text bg-white">
+          <i class="fas fa-search"></i>
+        </div>
+
+        <input
+          type="text"
+          class="form-control"
+          name="productos"
+          placeholder="Buscar por nombre..."
+          [(ngModel)]="filtro"
+        />
+      </div>
+    </div>
+    <div class="container mt-4">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th class="d-none">id producto</th>
+            <th>Nombre Produto</th>
+            <th>Descripcion</th>
+            <th>Categoria</th>
+            <th>Precio Producto</th>
+            <th>Cantidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let p of producto
+                | paginate : { itemsPerPage: 5, currentPage: page };
+              let indice = index
+            "
+          >
+            <td>
+              <input (change)="agregarproducto($event, p)" type="checkbox" />
+            </td>
+            <td class="d-none">{{ p.idProducto }}</td>
+            <td>{{ p.nombreProducto }}</td>
+            <td>{{ p.descripcion }}</td>
+            <td>{{ p.idCategoria }}</td>
+            <td>{{ p.precioVenta }}</td>
+            <td>{{ p.cantidad }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <pagination-controls
+      (pageChange)="page = $event"
+      previousLabel="Anterior"
+      nextLabel="Siguiente"
+    >
+    </pagination-controls>
+  </ng-template>
+
+  <ng-template #templatecomprobante>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">
+        {{ tituloModal }}
+      </h4>
+      <button
+        type="button"
+        class="btn-close close pull-right"
+        aria-label="Close"
+        (click)="modalRef?.hide()"
+      >
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <!--
+          [] ==> variable de entrada
+          () ==> variable de salida
+          -->
+      <app-ventas-comprobante [venta]="miVenta"></app-ventas-comprobante>
+    </div>
+  </ng-template>
+
+  <ng-template #templatelistaventas>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">INFORME DE VENTAS REALIZADAS</h4>
+      <input
+        (click)="modalRef?.hide()"
+        type="button"
+        class="btn btn-danger btn-sm float-end"
+        value="X"
+      />
+    </div>
+    <div class="modal-body">
+      <!--
+          [] ==> variable de entrada
+          () ==> variable de salida
+          -->
+      <app-ventas-list></app-ventas-list>
+    </div>
+  </ng-template>
+</div>

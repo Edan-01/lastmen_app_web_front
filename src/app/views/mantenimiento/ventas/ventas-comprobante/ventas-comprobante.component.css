@@ -1,0 +1,44 @@
+.mi-imagen {
+  position: absolute;
+  right: 30px;
+  width: 215px;
+  height: 100px;
+  background-image: url("src/assets/imagenes/logoLastmen.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.factura {
+    table-layout: fixed;
+  }
+  
+  .fact-info > div > h5 {
+    font-weight: bold;
+  }
+  
+  .factura > thead {
+    border-top: solid 3px #000;
+    border-bottom: 3px solid #000;
+  }
+  
+  .factura > thead > tr > th:nth-child(2), .factura > tbod > tr > td:nth-child(2) {
+    width: 300px;
+  }
+  
+  .factura > thead > tr > th:nth-child(n+3) {
+    text-align: right;
+  }
+  
+  .factura > tbody > tr > td:nth-child(n+3) {
+    text-align: right;
+  }
+  
+  .factura > tfoot > tr > th, .factura > tfoot > tr > th:nth-child(n+3) {
+    font-size: 24px;
+    text-align: right;
+  }
+  
+  .cond {
+    border-top: solid 2px #000;
+  }
+ 

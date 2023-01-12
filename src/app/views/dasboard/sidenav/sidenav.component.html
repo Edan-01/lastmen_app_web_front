@@ -1,0 +1,137 @@
+<div id="layoutSidenav_nav">
+  
+  <nav class="sb-sidenav accordion  sb-sidenav-dark  " id="sidenavAccordion">
+    <div class="sb-sidenav-menu ">
+      <div class="nav ">
+        <div class="sb-sidenav-menu-heading ">Home</div>
+        <a class="nav-link" href="#">
+          <div class="sb-nav-link-icon">
+            <i class="fas fa-tachometer-alt"></i>
+          </div>
+          Home
+        </a>
+        <div class="sb-sidenav-menu-heading">Datos</div>
+        <a routerLink="mant/producto" class="nav-link" href="charts.html">
+          <div class="sb-nav-link-icon"> <i class="fas fa-warehouse"></i> </div>
+          Almacen
+        </a>
+        <a
+          class="nav-link collapsed"
+          href="#"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseLayouts"
+          aria-expanded="false"
+          aria-controls="collapseLayouts"
+        >
+        
+          <div class="sb-nav-link-icon"><i class="fas fa-wrench"></i></div>
+          Mantenimiento 
+          <div class="sb-sidenav-collapse-arrow">
+            <i class="fas fa-angle-down"></i>
+          </div>
+        </a>
+        
+        <div
+          class="collapse"
+          id="collapseLayouts"
+          aria-labelledby="headingOne"
+          data-bs-parent="#sidenavAccordion"
+        >
+          <nav class="sb-sidenav-menu-nested nav">
+            <a  routerLink="mant/proveedor" class="nav-link" href="#" >Proveedor</a>     
+            <a routerLink="mant/cliente" class="nav-link" href="#" >Cliente</a>
+            <a routerLink="mant/categoria" class="nav-link" href="#" >Categoria</a>
+            
+          </nav>
+        </div>
+        
+        <a
+          class="nav-link collapsed"
+          href="#"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsePages"
+          aria-expanded="false"
+          aria-controls="collapsePages"
+        >
+        
+          <div class="sb-nav-link-icon"><i class="fas fa-cart-arrow-down"></i></div>
+          Venta
+          <div class="sb-sidenav-collapse-arrow">
+            <i class="fas fa-angle-down"></i>
+          </div>
+        </a>
+        <div
+          class="collapse"
+          id="collapsePages"
+          aria-labelledby="headingTwo"
+          data-bs-parent="#sidenavAccordion"
+        >
+          <nav
+            class="sb-sidenav-menu-nested nav"
+          >
+            <a
+            routerLink="mant/ventas"
+            class="nav-link"
+              href="#"
+            >
+              Realizar Venta
+             
+            </a>
+            <a
+            routerLink="mant/detalleventas"
+            class="nav-link"
+              href="#"
+            >
+              Lista de Detalle Ventas
+             
+            </a>                    
+    
+          </nav>
+        </div>
+
+    
+
+
+
+        <a
+        class="nav-link collapsed"
+        href="#"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseling"
+        aria-expanded="false"
+        aria-controls="collapseling"
+      >
+        
+        
+      </a>
+      <div
+      class="collapse"
+      id="collapseling"
+      aria-labelledby="headingOne"
+      data-bs-parent="#sidenavAccordion"
+    >
+      
+      
+    </div>
+
+        
+
+
+        <div class="sb-sidenav-menu-heading">Administrador</div>
+        <a routerLink="mant/usuario" class="nav-link" href="charts.html">
+          <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+          Usuario
+        </a>
+        
+      </div>
+    </div>
+    <div class="sb-sidenav-footer">
+      <i class="fas fa-user"></i>
+      <div class="small"></div>
+      {{usuario.nombres}} {{usuario.apellidos}}
+      <div class="small"></div>
+      {{usuario.tipoUsuario}}
+    </div>
+    
+  </nav>
+</div>

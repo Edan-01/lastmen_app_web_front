@@ -1,0 +1,26 @@
+<div class="container mt-2">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th hidden>ID VENTA</th>
+        <th>USUARIO</th>
+        <th>CLIENTE</th>
+        <th>FECHA</th>
+        <th>TIPO COMPROBANTE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let d of ventas,let indice=index">
+        <td>{{ indice + 1 }}</td>
+        <td hidden>{{ d.idVenta }} </td>
+        <td>{{ usuarioTipoMap.get(d.idUsuario) }}</td>
+        <td>{{ clienteTipoMap.get(d.idCliente) }}</td>
+        <td>{{ d.fecha }}</td>
+        <td>{{ d.tipoComprobante}}</td>
+        
+      </tr>
+    </tbody>
+  </table>
+</div>
+

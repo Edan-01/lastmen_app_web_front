@@ -1,0 +1,101 @@
+<div class="container mt-5">
+  <div class="input-group">
+    <legend>Busqueda</legend>
+    <div class = "input-group-text bg-white">
+      <i class="fas fa-search"></i>
+    </div>
+    <input type="text" class="form-control" name="filtro" placeholder="Buscar usuario.." [(ngModel)]="filtro" > 
+  </div>
+</div>
+<div class="container mt-5">
+    <table class="table table-bordered table-striped">
+      <thead>              
+        <tr>
+          <th>#</th>
+          <th hidden>id Usuario</th>
+          <th>Usuario</th>
+          <th>Nombre</th>
+          <th>Apellidos</th>
+          <th>Tipo de Usuario</th>
+          <th>Direccion</th>
+          <th hidden>Contraseña</th>
+          <th>Correo</th>
+          
+          <th>
+            <button
+              (click)="crearRegistro(template)"
+              class="btn btn-primary btn-sm"
+            >
+              <i class="fas fa-plus"></i>
+            </button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of usuario| filtroUsuario:filtro |paginate: { itemsPerPage: 7, currentPage: page } ,let indice=index">
+          <td>{{ indice + 1 }}</td>
+          <td hidden>{{ d.idUsuario }} </td>
+          <td>{{ d.usuario }}</td>
+          <td>{{ d.nombres }}</td> 
+          <td>{{ d.apellidos}}</td>
+          <td>{{ d.tipoUsuario }}</td>
+          <td>{{ d.direccion }}</td>
+          <!-- <td hidden>{{ d.password}}</td> -->
+          <td>{{ d.correo}}</td>
+         
+          <td>
+            <!-- inicio boton editar -->
+            <button
+              style="margin-left: 2px; margin-right: 2px"
+              class="btn btn-sm btn-success"
+              (click)="editarRegistro(d, template)"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
+            <!-- fin boton editar -->
+  
+            <button
+              (click)="modalDelete(d)"
+              style="margin-left: 2px; margin-right: 2px"
+              class="btn btn-sm btn-danger"
+            >
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">
+        {{ tituloModal }}
+      </h4>
+      <button
+        type="button"
+        class="btn-close close pull-right"
+        aria-label="Close"
+        (click)="modalRef?.hide()"
+      >
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <!--
+      [] ==> variable de entrada
+      () ==> variable de salida
+      -->
+      <app-usuario-register
+      [usuario]="usuarioSelected"
+      (closeModalEmmit)="recibeCloseModal($event)"
+    ></app-usuario-register>
+  </div>
+</ng-template>
+
+<pagination-controls  
+                      (pageChange)="page = $event"
+                      previousLabel="Anterior"
+                      nextLabel="Siguiente"
+                      >
+</pagination-controls>

@@ -1,0 +1,25 @@
+<form [formGroup]="myForm">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label hidden for=""><strong>Código</strong></label>
+                <input hidden type="number" class="form-control" formControlName="idCategoria" readonly>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="form-group">
+                <label for=""><strong>Nombre de Categoria</strong></label>
+                <input type="text" class="form-control" formControlName="nombreCategoria" placeholder="Ingrese nueva Categoria">
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12 ">
+            <button (click)="save()" class="btn btn-primary btn-sm float-end mr-2 ml-2"> <i class="fas fa-save"></i> Guardar</button>
+            <button (click)="closeModal(false)" class="btn btn-danger btn-sm float-end mr-2 ml-2"> <i class="fas fa-ban"></i> Cancelar</button>
+        </div>
+    </div>
+</form>
