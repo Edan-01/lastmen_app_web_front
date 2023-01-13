@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ClienteModel } from 'src/app/models/clientes.model';
@@ -12,17 +19,14 @@ import { DetalleVentaModel } from 'src/app/models/detalleVentas.model';
 import { DatePipe } from '@angular/common';
 import Swal from 'sweetalert2';
 
-
-
-
 @Component({
   selector: 'app-ventas-register',
   templateUrl: './ventas-register.component.html',
-  styleUrls: ['./ventas-register.component.css']
+  styleUrls: ['./ventas-register.component.css'],
 })
 export class VentasRegisterComponent implements OnInit {
   page = 0;
-  filtro='';
+  filtro = '';
   today: Date = new Date();
   pipe = new DatePipe('en-US');
   todayWithPipe = null;
@@ -43,8 +47,8 @@ export class VentasRegisterComponent implements OnInit {
   usuario: any = {};
   total_price: number = 0;
   productoseleccionados: ProductoModel[] = [];
-  tituloModal:string = "";
-  miVenta:VentasModel=new VentasModel();
+  tituloModal: string = '';
+  miVenta: VentasModel = new VentasModel();
   constructor(
     private modalService: BsModalService,
     private _sesionSevice: SesionService,
@@ -54,7 +58,6 @@ export class VentasRegisterComponent implements OnInit {
     private _produtoservice: ProductoService
   ) {
     this.myForm = this.fb.group({
-
       idVenta: [null, [Validators.required]],
       idUsuario: [null, [Validators.required]],
       idCliente: [null, [Validators.required]],
@@ -65,20 +68,26 @@ export class VentasRegisterComponent implements OnInit {
     });
   }
 
-  get f() { return this.myForm.controls; }
-  get DetalleVentas(): FormArray { return this.myForm.get("DetalleVentas") as FormArray }
+  get f() {
+    return this.myForm.controls;
+  }
+  get DetalleVentas(): FormArray {
+    return this.myForm.get('DetalleVentas') as FormArray;
+  }
 
   ngOnInit(): void {
     /*FIXME: SET VALUE TRAE ERRORES CUANDO LOS ATRIBUTOS NO COINCIDEN AL 100% */
     //this.myForm.setValue(this.estado);
     this.myForm.patchValue(this.ventas);
     this.obetenerUsuario();
-    
   }
 
   newVentaArray(detalle: DetalleVentaModel): FormGroup {
     return this.fb.group({
-      idDetalleVenta: [{ value: detalle.idDetalleCompra, disabled: true }, [Validators.required]],
+      idDetalleVenta: [
+        { value: detalle.idDetalleCompra, disabled: true },
+        [Validators.required],
+      ],
       idVenta: [detalle.idVenta, [Validators.required]],
       idProducto: [detalle.idProducto, [Validators.required]],
       cantidad: [detalle.cantidad, [Validators.required]],
@@ -88,8 +97,7 @@ export class VentasRegisterComponent implements OnInit {
       descripcion_producto: [detalle.descripcion_producto, []],
       stock: [detalle.stock, []],
       precio_total: [0, []],
-      
-    })
+    });
     debugger;
   }
 
@@ -97,31 +105,30 @@ export class VentasRegisterComponent implements OnInit {
     this.usuario = this._sesionSevice.getUser();
   }
   openListCliente(template: TemplateRef<any>) {
-    this._clienteServece.getAll().subscribe(
-      (data: ClienteModel[]) => {
-        this.clienteList = data;
-        this.openModal(template);
-      }
-    )
+    this._clienteServece.getAll().subscribe((data: ClienteModel[]) => {
+      this.clienteList = data;
+      this.openModal(template);
+    });
   }
   openListProducto(template: TemplateRef<any>) {
-    this._produtoservice.getAll().subscribe(
-      (data: ProductoModel[]) => {
-        this.producto = data;
-        this.openModal(template);
-      }
-    )
+    this._produtoservice.getAll().subscribe((data: ProductoModel[]) => {
+      this.producto = data;
+      this.openModal(template);
+    });
   }
 
   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, Object.assign(
-      {},
-      {
-        class: 'gray modal-lg modal-dialog-centered',
-        ignoreBackdropClick: true,
-        keyboard: true,
-      }
-    ));
+    this.modalRef = this.modalService.show(
+      template,
+      Object.assign(
+        {},
+        {
+          class: 'gray modal-lg modal-dialog-centered',
+          ignoreBackdropClick: true,
+          keyboard: true,
+        }
+      )
+    );
   }
 
   closeModal(res: boolean) {
@@ -142,29 +149,26 @@ export class VentasRegisterComponent implements OnInit {
     debugger;
     if (this.ventas.idVenta == 0) {
       this.createVentas();
-
-    }
-    else {
+    } else {
       this.updateVentas();
     }
-
   }
 
   createVentas() {
     debugger;
     this._ventasService.create(this.ventas).subscribe(
       (data: VentasModel) => {
-       // alert("Registro creado de forma satisfactoría");
+        // alert("Registro creado de forma satisfactoría");
         Swal.fire({
           position: 'center',
           icon: 'success',
           title: 'Registro creado de forma satisfactoría',
           showConfirmButton: false,
-          timer:1650
-          });
+          timer: 1650,
+        });
         this.closeModalEmmit.emit(true);
       },
-      err => {
+      (err) => {
         console.log(err);
         this.closeModalEmmit.emit(false);
       }
@@ -173,17 +177,17 @@ export class VentasRegisterComponent implements OnInit {
   updateVentas() {
     this._ventasService.update(this.ventas).subscribe(
       (data: VentasModel) => {
-       // alert("Registro actualizado de forma satisfactoría");
+        // alert("Registro actualizado de forma satisfactoría");
         Swal.fire({
           position: 'center',
           icon: 'success',
           title: 'Registro actualizado de forma satisfactoría',
           showConfirmButton: false,
-          timer:1650
-          });
+          timer: 1650,
+        });
         this.closeModalEmmit.emit(true);
       },
-      err => {
+      (err) => {
         console.log(err);
         this.closeModalEmmit.emit(false);
       }
@@ -203,48 +207,48 @@ export class VentasRegisterComponent implements OnInit {
       detalleVenta.idVenta = 0;
       detalleVenta.nombre_producto = producto.nombreProducto;
       detalleVenta.descripcion_producto = producto.descripcion;
-      detalleVenta.precio_unitario= producto.precioVenta;
+      detalleVenta.precio_unitario = producto.precioVenta;
 
       this.DetalleVentas.push(this.newVentaArray(detalleVenta));
     }
   }
   removeElement(i: number) {
-    this.total_price =0;
+    this.total_price = 0;
     this.DetalleVentas.removeAt(i);
-    
+
     let detalles: DetalleVentaModel[];
     detalles = this.DetalleVentas.getRawValue();
-    detalles.forEach(x => {
+    detalles.forEach((x) => {
       this.total_price = this.total_price + x.precio_total;
     });
   }
 
   changerValueFormArray(i: number) {
-    this.total_price=0;
+    this.total_price = 0;
     let obj_1: DetalleVentaModel;
     obj_1 = new DetalleVentaModel();
     obj_1 = this.DetalleVentas.controls[i].value;
-    let precio_total = (obj_1.cantidad * obj_1.precio_unitario) - obj_1.descuento;
+    let precio_total = obj_1.cantidad * obj_1.precio_unitario - obj_1.descuento;
 
-    let obj = this.DetalleVentas.controls[i].get("precio_total")?.setValue(precio_total);
+    let obj = this.DetalleVentas.controls[i]
+      .get('precio_total')
+      ?.setValue(precio_total);
 
     let detalles: DetalleVentaModel[];
     detalles = this.DetalleVentas.getRawValue();
 
-    detalles.forEach(x => {
+    detalles.forEach((x) => {
       this.total_price = this.total_price + x.precio_total;
     });
-    
   }
-  
 
-  procesarVenta() {
+  realizarVenta(template: TemplateRef<any>) {
     let venta: any = this.myForm.value;
     venta.idUsuario = this.usuario.idUsuario;
     venta.idCliente = this.clienteSelect.idCliente;
-    venta.fecha=this.pipe.transform(Date.now(), 'dd/MM/yyyy');
-    venta.tipoComprobante="Boleta";
-    
+    venta.fecha = this.pipe.transform(Date.now(), 'dd/MM/yyyy');
+    venta.tipoComprobante = 'Boleta';
+
     this._ventasService.create(venta).subscribe(
       (data: any) => {
         console.log();
@@ -254,25 +258,23 @@ export class VentasRegisterComponent implements OnInit {
           icon: 'success',
           title: 'Venta Realizada de forma satisfactoría',
           showConfirmButton: false,
-          timer:1650
-          });
-        this.miVenta=data;
+          timer: 1650,
+        });
+        this.miVenta = data;
         console.log(this.miVenta);
       },
-      err => {
-
-      }
+      (err) => {}
     );
+
+    setTimeout(() => {
+      // <<<---using ()=> syntax
+      this.tituloModal = 'COMPROBANTE DE PAGO';
+      // this.categoriaSelected = categoria;
+      this.openModal(template);
+    }, 2000);
   }
-  generarComprobante(template: TemplateRef<any>)
-  {
-    this.tituloModal="COMPROBANTE DE PAGO";
-   // this.categoriaSelected = categoria;
-    this.openModal(template);
-  }
-  listVenta(template: TemplateRef<any>)
-  {
+
+  listVenta(template: TemplateRef<any>) {
     this.openModal(template);
   }
 }
-

@@ -18,8 +18,8 @@
               name="idcliente"
               required
             />
-            <div class="row" >
-              <div style="display: grid;">
+            <div class="row">
+              <div style="display: grid">
                 <input
                   (click)="openListCliente(TemplateCliente)"
                   type="button"
@@ -35,7 +35,9 @@
                     name="nom_cliente"
                     id="nom_cliente"
                     class="form-control"
-                    [(ngModel)]="clienteSelect.nombres + ' ' + clienteSelect.apellidos"
+                    [(ngModel)]="
+                      clienteSelect.nombres + ' ' + clienteSelect.apellidos
+                    "
                     required
                     disabled
                   />
@@ -104,14 +106,16 @@
               <Th
                 ><label><i class="fas fa-user"></i> VENDEDOR</label></Th
               >
-              <td style="align-items: center;" >{{ usuario.nombres }} {{ usuario.apellidos }}</td>
+              <td style="align-items: center">
+                {{ usuario.nombres }} {{ usuario.apellidos }}
+              </td>
             </Table>
           </div>
         </div>
       </div>
 
       <div class="table-responsive">
-        <div style="display: grid;">
+        <div style="display: grid">
           <input
             (click)="openListProducto(TemplateProducto)"
             type="button"
@@ -219,11 +223,10 @@
             </tbody>
 
             <tfoot id="detalle_totales">
-              
-              <tr> 
+              <tr>
                 <th></th>
                 <th colspan="6">
-                  <p class="text-end"><br>Precio Total</p>
+                  <p class="text-end"><br />Precio Total</p>
                 </th>
                 <th class="text-end">{{ total_price }}</th>
               </tr>
@@ -232,10 +235,9 @@
           <div style="text-align: center">
             <div>
               <a
-                (click)="procesarVenta()"
+                (click)="realizarVenta(templatecomprobante)"
                 class="btn btn-success text-center"
                 id="btn_facturar_venta"
-                (click)="generarComprobante(templatecomprobante)"
                 ><i class="fas fa-save"></i> Generar Venta</a
               >
             </div>
