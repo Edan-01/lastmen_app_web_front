@@ -16,7 +16,7 @@ import html2canvas from 'html2canvas';
 })
 export class VentasComprobanteComponent implements OnInit {
   @Input() venta: VentasModel = new VentasModel();
-  detalleVenta: DetalleVentaModel= new DetalleVentaModel();
+
   cliente: ClienteModel = new ClienteModel();
   usuario: UsuarioModel = new UsuarioModel();
   producto: ProductoModel[] = [];
@@ -92,43 +92,43 @@ export class VentasComprobanteComponent implements OnInit {
   //   mywindow.print();
   // }
 
-  // CANVAS
-  PrintElem() {
-    var elem = document.getElementById("app2");
-    if (!elem) {
-      alert("No se encontró el elemento con id 'app2'");
-      return;
-    }
-    var mywindow: any = window.open('', 'PRINT', 'height=1000,width=800');
-    let app2 = document.getElementById('app2');
-    if (app2) {
-      mywindow.document.write('<html><head><title>' + document.title + '</title>');
-      mywindow.document.write('</head><body >');
-      mywindow.document.write('<h1>' + document.title + '</h1>');
-      html2canvas(elem, {allowTaint: true}).then(canvas => {
-      var imgData = canvas.toDataURL('image/png');
-      mywindow.document.write('<img src="' + imgData + '" />');
-      mywindow.document.write('</body></html>');
-      mywindow.focus();
-      mywindow.print();
-      mywindow.document.close(); 
-      return true;
-      });
-    }
-  }
-
-    // ORIGINAL
+  // // CANVAS
   // PrintElem() {
-  //   var mywindow: any = window.open('', 'PRINT', 'height=400,width=600');
+  //   var elem = document.getElementById("app2");
+  //   if (!elem) {
+  //     alert("No se encontró el elemento con id 'app2'");
+  //     return;
+  //   }
+  //   var mywindow: any = window.open('', 'PRINT', 'height=1000,width=800');
   //   let app2 = document.getElementById('app2');
   //   if (app2) {
-  //     let html = app2.innerHTML; //This      
-  //     mywindow.document.write(html);
-  //   }    
-
-  //   mywindow.document.close();
-  //   mywindow.focus();
-  //   mywindow.print();
+  //     mywindow.document.write('<html><head><title>' + document.title + '</title>');
+  //     mywindow.document.write('</head><body >');
+  //     mywindow.document.write('<h1>' + document.title + '</h1>');
+  //     html2canvas(elem, {allowTaint: true}).then(canvas => {
+  //     var imgData = canvas.toDataURL('image/png');
+  //     mywindow.document.write('<img src="' + imgData + '" />');
+  //     mywindow.document.write('</body></html>');
+  //     mywindow.focus();
+  //     mywindow.print();
+  //     mywindow.document.close(); 
+  //     return true;
+  //     });
+  //   }
   // }
+
+   //  ORIGINAL
+   PrintElem() {
+     var mywindow: any = window.open('', 'PRINT', 'height=400,width=600');
+     let app2 = document.getElementById('app2');
+     if (app2) {
+       let html = app2.innerHTML; this      
+       mywindow.document.write(html);
+     }    
+
+     mywindow.document.close();
+     mywindow.focus();
+     mywindow.print();
+   }
 }
 
