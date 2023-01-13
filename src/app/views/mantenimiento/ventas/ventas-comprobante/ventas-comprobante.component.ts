@@ -72,6 +72,7 @@ export class VentasComprobanteComponent implements OnInit {
       });
   }
 
+  //CON CSS
   // PrintElem() {
   //   var mywindow: any = window.open('', 'PRINT', 'height=400,width=600');
   //   let app2 = document.getElementById('app2');
@@ -103,7 +104,7 @@ export class VentasComprobanteComponent implements OnInit {
       mywindow.document.write('<html><head><title>' + document.title + '</title>');
       mywindow.document.write('</head><body >');
       mywindow.document.write('<h1>' + document.title + '</h1>');
-      html2canvas(elem).then(canvas => {
+      html2canvas(elem, {allowTaint: true}).then(canvas => {
       var imgData = canvas.toDataURL('image/png');
       mywindow.document.write('<img src="' + imgData + '" />');
       mywindow.document.write('</body></html>');

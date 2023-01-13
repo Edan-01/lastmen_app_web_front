@@ -247,7 +247,7 @@ export class VentasRegisterComponent implements OnInit {
     venta.idUsuario = this.usuario.idUsuario;
     venta.idCliente = this.clienteSelect.idCliente;
     venta.fecha = this.pipe.transform(Date.now(), 'dd/MM/yyyy');
-    venta.tipoComprobante = 'Boleta';
+    venta.tipoComprobante = 'Boleta Electronica';
 
     this._ventasService.create(venta).subscribe(
       (data: any) => {
