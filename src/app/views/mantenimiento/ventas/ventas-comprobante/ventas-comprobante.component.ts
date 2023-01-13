@@ -6,6 +6,7 @@ import { VentasModel } from 'src/app/models/ventas.model';
 import { ClientesService } from 'src/app/service/clientes.service';
 import { ProductoService } from 'src/app/service/producto.service';
 import { UsuarioService } from 'src/app/service/usuario.service';
+import { DetalleVentaModel } from 'src/app/models/detalleVentas.model';
 import html2canvas from 'html2canvas';
 
 @Component({
@@ -15,7 +16,7 @@ import html2canvas from 'html2canvas';
 })
 export class VentasComprobanteComponent implements OnInit {
   @Input() venta: VentasModel = new VentasModel();
-
+  detalleVenta: DetalleVentaModel= new DetalleVentaModel();
   cliente: ClienteModel = new ClienteModel();
   usuario: UsuarioModel = new UsuarioModel();
   producto: ProductoModel[] = [];

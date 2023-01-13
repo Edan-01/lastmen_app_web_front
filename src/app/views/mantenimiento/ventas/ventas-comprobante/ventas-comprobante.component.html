@@ -1,8 +1,81 @@
 
+<link rel="stylesheet" href="./ventas-comprobante.component.css">
+
+
+
+<div id="app2" class="boleto">
+
+  <div class="boleto2">
+
+    <img  src="./assets/imagenes/logoLastmen.png" alt="" width="100px" >
+
+  </div>
+  <div class="header"> 
+   
+    <p><b>LASTMEN PRODUCTOS NATURALES</b></p>
+    <p class="producto"> Av. Tito Jaime Fernande3z 258 - Junín - Tingo Maria</p>
+    <p class="producto"> R.U.C. N° 10443352487 </p>
+    <p><b>BOLETA DE VENTA ELECTRONICA</b></p>
+    <p><b>N° OPERACION: 102</b></p>
+    <p>{{venta.fecha}}</p>
+    <h6>Cajero:{{usuario.nombres}} {{usuario.apellidos}}</h6>
+  </div>
+    <hr />
+    <div class="cliente">
+    <h6>Cliente: {{cliente.nombres}}</h6>
+    <h6>DNI: {{cliente.dni}}</h6> 
+    <h6>Dirección: {{cliente.direccion}}</h6>    
+  </div>
+<hr  />
+
+<div class="producto">
+  <div class="tabla-venta">
+    <table>
+      <thead>
+        <tr>
+          <th style="padding-left:3%;">Cant.</th>
+          <th style="padding-left:10%;">Descripción</th> 
+          <th style="padding-left:30%;">P.Unit</th>
+          <!-- <th>Descuento</th> -->
+          <th style="padding-left:40%;">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of venta.detalleVentas">
+          <td style="padding-left:3%;">{{d.cantidad}}</td>
+          <td style="padding-left:10%;">{{d.nombre_producto}}</td>
+          <td style="padding-left:30%;">{{d.precio_unitario}}</td>
+          <td style="padding-left:40%;">S/.{{(d.cantidad * d.precio_unitario) - d.descuento}}</td>
+          <!-- <th style="padding-left:28%;">S/.{{total}}</th> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <hr/>
+  <p>DESCUENTO: {{detalleVenta.descuento}}</p>
+  <hr/>
+  <p>SUB TOTAL. S/{{total}}</p>
+  <p>I.G.V. S/ 3.1416</p>
+  <p>TOTAL S/ </p>
+</div>
+<hr/>
+</div>
+
+<div style="text-align: center;">
+   <script>
+   
+
+   </script>                  
+<a (click)="PrintElem()" class="btn btn-success text-center" id="btn_facturar_venta"><i class="fas fa-print"></i>
+    Imprimir</a>
+</div>
+
+
+<!-- 
 <div id="app2" class="col-11">
   <div class="row my-3">
     <div>
-      <h5>N° de factura: 0001</h5>
+      <h5>N° de boleta electrica: 00{{venta.idVenta}}</h5>
     </div>
     <div class="mi-imagen"></div>
     <div class="col-10">
@@ -35,7 +108,7 @@
       <thead>
         <tr>
           <th>Nombre</th>
-          <!-- <th>Descripcion</th> -->
+           <th>Descripcion</th> 
           <th>Cant.</th>
           <th>Precio Unitario</th>
           <th>Descuento</th>
@@ -45,7 +118,7 @@
       <tbody>
         <tr *ngFor="let d of venta.detalleVentas">
           <td>{{ d.producto.nombreProducto }}</td>
-          <!-- <td>{{d.producto.descripcion}}</td> -->
+           <td>{{d.producto.descripcion}}</td> 
           <td>{{ d.cantidad }}</td>
           <td>{{ d.precio_unitario }}</td>
           <td>{{ d.descuento }}</td>
@@ -74,4 +147,4 @@
       ><i class="fas fa-print"></i>
     </a>
   </div>
-</div>
+</div> -->

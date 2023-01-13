@@ -1,3 +1,45 @@
+
+
+/* AAAAA */
+td,th{
+  width: 100%;
+  word-wrap: break-word;
+
+}
+hr{
+  height: 3px;
+  background-color: black;
+
+}
+.tabla-venta{
+  width: 400px;
+}
+.boleto {
+        border-radius: 9px;
+        margin-left: 31%;
+        border-width: 1.7px;
+        border-style: solid;
+        width: 43%;
+        border-color: black;
+        padding: 11px;
+}
+
+.boleto2{
+  text-align: center;
+}
+
+.header{
+  text-align: center;
+}
+.cliente{
+  font-size: 0.8rem;
+}
+.producto{
+  font-size: 0.8rem;
+}
+
+
+/* AAAA */
 .mi-imagen {
   position: absolute;
   right: 80px;
