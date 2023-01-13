@@ -98,7 +98,6 @@ export class VentasRegisterComponent implements OnInit {
       stock: [detalle.stock, []],
       precio_total: [0, []],
     });
-    debugger;
   }
 
   obetenerUsuario() {
@@ -155,7 +154,6 @@ export class VentasRegisterComponent implements OnInit {
   }
 
   createVentas() {
-    debugger;
     this._ventasService.create(this.ventas).subscribe(
       (data: VentasModel) => {
         // alert("Registro creado de forma satisfactoría");
@@ -200,7 +198,7 @@ export class VentasRegisterComponent implements OnInit {
       let detalleVenta: DetalleVentaModel;
       detalleVenta = new DetalleVentaModel();
       detalleVenta.stock = producto.cantidad;
-      detalleVenta.cantidad = 0;
+      detalleVenta.cantidad = 1;
       detalleVenta.descuento = 0;
       detalleVenta.idDetalleCompra = 0;
       detalleVenta.idProducto = producto.idProducto;
