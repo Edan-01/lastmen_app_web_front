@@ -1,120 +1,41 @@
+hr {
+  height: 3px;
+  background-color: black;
 
-/* AAAAA */
-td,th{
+}
+
+.boleto {
+  border-radius: 9px;
+  margin: 0 auto;
+  border-width: 1.7px;
+  border-style: solid;
+  width: 45%;
+  border-color: rgb(6, 6, 6);
+  padding: 11px;
+}
+table{
+  margin: 0;
+  padding: 0;
   width: 100%;
+  table-layout: fixed;
+}
+th,td{
   word-wrap: break-word;
-
+  padding: 1px;
+  text-align: center;
 }
-hr{
-  height: 3px;
-  background-color: black;
-
+thead th{
+  background-color: rgb(5, 5, 5);
+  color: aliceblue;
+ 
 }
-.tabla-venta{
-  width: 400px;
+tr:nth-of-type(odd){
+  background-color: #e6e6e6;
 }
-.boleto {
-        border-radius: 9px;
-        margin-left: 31%;
-        border-width: 1.7px;
-        border-style: solid;
-        width: 43%;
-        border-color: black;
-        padding: 11px;
-}
-
-.boleto2{
+.boleto2 {
   text-align: center;
 }
 
-.header{
+.header {
   text-align: center;
 }
-.cliente{
-  font-size: 0.8rem;
-}
-.producto{
-  font-size: 0.8rem;
-}
-
-
-/* AAAA */
-.mi-imagen {
-  position: absolute;
-  right: 80px;
-  width: 315px;
-  height: 120px;
-  background-image: url("src/assets/imagenes/logoLastmen.png");
-  background-size: cover;
-  background-position: center;
-}
-
-.factura {
-    table-layout: fixed;
-  }
-  
-  .fact-info > div > h5 {
-    font-weight: bold;
-  }
-  
-  .factura > thead {
-    border-top: solid 3px #000;
-    border-bottom: 3px solid #000;
-  }
-  
-  .factura > thead > tr > th:nth-child(2), .factura > tbod > tr > td:nth-child(2) {
-    width: 300px;
-  }
-  
-  .factura > thead > tr > th:nth-child(n+3) {
-    text-align: right;
-  }
-  
-  .factura > tbody > tr > td:nth-child(n+3) {
-    text-align: right;
-  }
-  
-  .factura > tfoot > tr > th, .factura > tfoot > tr > th:nth-child(n+3) {
-    font-size: 24px;
-    text-align: right;
-  }
-  
-  .cond {
-    border-top: solid 2px #000;
-  }
-
-  #app2{
-    padding: 15px;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    overflow:auto;
-  }
-  */
-
-  
-
-hr{
-  height: 3px;
-  background-color: black;
-
-}
-.boleto {
-        border-radius: 9px;
-        margin-left: 31%;  
-        border-width: 1.7px;
-        border-style: solid;
-        width: 43%;
-        border-color: black;
-        padding: 11px;
-}
-
-.boleto2{
-  text-align: center;
-}
-
-.header{
-  text-align: center;
-}
-
-
