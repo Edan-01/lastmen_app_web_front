@@ -114,7 +114,10 @@ export class VentasRegisterComponent implements OnInit {
     this._produtoservice.getAll().subscribe((data: ProductoModel[]) => {
       this.producto = data;
       this.openModal(template);
+      
+      
     });
+    
   }
 
   openModal(template: TemplateRef<any>) {
@@ -148,6 +151,7 @@ export class VentasRegisterComponent implements OnInit {
     this.ventas = this.myForm.getRawValue();
     debugger;
     if (this.ventas.idVenta == 0) {
+      
       this.createVentas();
     } else {
       this.updateVentas();
@@ -209,6 +213,9 @@ export class VentasRegisterComponent implements OnInit {
       detalleVenta.descripcion_producto = producto.descripcion;
       detalleVenta.precio_unitario = producto.precioVenta;
       this.DetalleVentas.push(this.newVentaArray(detalleVenta));
+        e.target.disabled = true
+        
+      
     }
   }
   removeElement(i: number) {
@@ -266,9 +273,7 @@ export class VentasRegisterComponent implements OnInit {
     );
 
     setTimeout(() => {
-      // <<<---using ()=> syntax
       this.tituloModal = 'COMPROBANTE DE PAGO';
-      // this.categoriaSelected = categoria;
       this.openModal(template);
     }, 2000);
   }

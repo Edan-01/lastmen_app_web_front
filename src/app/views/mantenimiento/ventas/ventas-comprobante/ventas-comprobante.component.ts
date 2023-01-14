@@ -16,11 +16,12 @@ import html2canvas from 'html2canvas';
 })
 export class VentasComprobanteComponent implements OnInit {
   @Input() venta: VentasModel = new VentasModel();
-  detalleVenta: DetalleVentaModel= new DetalleVentaModel();
+  detalleVenta: DetalleVentaModel = new DetalleVentaModel();
   cliente: ClienteModel = new ClienteModel();
   usuario: UsuarioModel = new UsuarioModel();
   producto: ProductoModel[] = [];
-  total: number = 0;
+  total: number = 0.00;
+  totolfinal: number = 0.00;
   constructor(
     private _clienteservice: ClientesService,
     private _usuarioservice: UsuarioService,
@@ -29,7 +30,6 @@ export class VentasComprobanteComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.venta);
-    // this.generarBoleta();
     this.obtenerUsuario();
     this.obtenerCliente();
     this.obtenerproducto();
@@ -73,28 +73,8 @@ export class VentasComprobanteComponent implements OnInit {
       });
   }
 
-  //CON CSS
-  // PrintElem() {
-  //   var mywindow: any = window.open('', 'PRINT', 'height=400,width=600');
-  //   let app2 = document.getElementById('app2');
-  //   if (app2) {
-  //     let html = app2.innerHTML; 
-      
-  //     // Obtener el contenido de la hoja de estilo actual
-  //     let css = document.getElementById("css-file").innerHTML; 
-      
-  //     // Incluir el contenido de la hoja de estilo en el documento de impresión
-  //     mywindow.document.write(`<style>${css}</style>${html}`);
-  //   }    
-
-  //   mywindow.document.close(); // necessary for IE >= 10
-  //   mywindow.focus(); // necessary for IE >= 10*/
-  //   mywindow.print();
-  // }
-
-  // // CANVAS
   PrintElem() {
-    var elem = document.getElementById("app2");
+    var elem = document.getElementById('app2');
     if (!elem) {
       alert("No se encontró el elemento con id 'app2'");
       return;
@@ -102,33 +82,20 @@ export class VentasComprobanteComponent implements OnInit {
     var mywindow: any = window.open('', 'PRINT', 'height=1000,width=800');
     let app2 = document.getElementById('app2');
     if (app2) {
-      mywindow.document.write('<html><head><title>' + document.title + '</title>');
+      mywindow.document.write(
+        '<html><head><title>' + document.title + '</title>'
+      );
       mywindow.document.write('</head><body >');
       mywindow.document.write('<h1>' + document.title + '</h1>');
-      html2canvas(elem, {allowTaint: true}).then(canvas => {
-      var imgData = canvas.toDataURL('image/png');
-      mywindow.document.write('<img src="' + imgData + '" />');
-      mywindow.document.write('</body></html>');
-      mywindow.focus();
-      mywindow.print();
-      mywindow.document.close(); 
-      return true;
+      html2canvas(elem, { allowTaint: true }).then((canvas) => {
+        var imgData = canvas.toDataURL('image/png');
+        mywindow.document.write('<img src="' + imgData + '" />');
+        mywindow.document.write('</body></html>');
+        mywindow.focus();
+        mywindow.print();
+        mywindow.document.close();
+        return true;
       });
     }
   }
-
-   //  ORIGINAL
-  //  PrintElem() {
-  //    var mywindow: any = window.open('', 'PRINT', 'height=400,width=600');
-  //    let app2 = document.getElementById('app2');
-  //    if (app2) {
-  //      let html = app2.innerHTML; this      
-  //      mywindow.document.write(html);
-  //    }    
-
-  //    mywindow.document.close();
-  //    mywindow.focus();
-  //    mywindow.print();
-  //  }
 }
-

@@ -2,16 +2,20 @@
 
 <div id="app2" class="boleto">
   <div class="boleto2">
-    <img src="./assets/imagenes/logoLastmen.png" alt="" width="100px" />
+    <img src="./assets/imagenes/logoLastmen.png" alt="logoLastmen" width="150px" />
   </div>
   <div class="header">
-    <p>Productos Naturales LASTMEN</p>
+    <p> <strong>Productos Naturales LASTMEN</strong></p>
     <p>Av. Tito Jaime Fernande3z 258 - Junín - Tingo Maria</p>
     <p>R.U.C. N° 10443352487</p>
     <h6>BOLETA DE VENTA ELECTRONICA</h6>
-    <h6>NRO OPERACION: 102</h6>
+    <h6>NRO OPERACION: 00{{venta.idVenta}}</h6>
     <p>{{ venta.fecha }}</p>
-    <h6>Cajero:{{ usuario.nombres }} {{ usuario.apellidos }}</h6>
+    <!-- <div id="cajero">
+      <p>Cajero:</p>
+      <p>{{ usuario.nombres }} {{ usuario.apellidos }}</p>
+    </div> -->
+    
   </div>
   <hr />
   <div class="cliente">
@@ -22,40 +26,40 @@
   <hr />
 
   <div class="producto">
-      <table>
-        <thead>
-          <tr>
-            <th >Nombre</th>
-            <th >Cant.</th>
-            <th >P.Unit</th>
-            <!-- <th>Descuento</th> -->
-            <th >Importe</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let d of venta.detalleVentas">
-            <td >{{ d.nombre_producto }}</td>
-            <td >{{ d.cantidad }}</td>
-            <td >S/.{{ d.precio_unitario }}</td>
-            <td >
-              S/.{{ d.cantidad * d.precio_unitario - d.descuento }}
-            </td>
-            <!-- <th style="padding-left:28%;">S/.{{total}}</th> -->
-          </tr>
-        </tbody>
-      </table>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Cant.</th>
+          <th>P.Unit</th>
+          <!-- <th>Descuento</th> -->
+          <th>Importe</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of venta.detalleVentas">
+          <td>{{ d.nombre_producto }}</td>
+          <td>{{ d.cantidad }}</td>
+          <td>S/.{{ d.precio_unitario }}</td>
+          <td>S/.{{ d.cantidad * d.precio_unitario - d.descuento }}</td>
+          <!-- <th style="padding-left:28%;">S/.{{total}}</th> -->
+        </tr>
+      </tbody>
+    </table>
 
     <!-- <hr /> -->
   </div>
-    <!-- <p>DESCUENTO: {{ detalleVenta.descuento }}</p> -->
-    <hr />
-    <!-- <p>SUB TOTAL. S/{{ total }}</p> -->
-    <p>TOTAL S/ {{ total }}</p>
-  
+  <!-- <p>DESCUENTO: {{ detalleVenta.descuento }}</p> -->
+  <hr />
+  <div id="total">
+    <p id="totaltext">TOTAL</p>
+    <p> S/ </p>
+    <p>{{ total }}</p>
+  </div>
   <hr />
 </div>
 
-<div style="text-align: center; padding-top: 1rem;">
+<div style="text-align: center; padding-top: 1rem">
   <script></script>
   <a
     (click)="PrintElem()"

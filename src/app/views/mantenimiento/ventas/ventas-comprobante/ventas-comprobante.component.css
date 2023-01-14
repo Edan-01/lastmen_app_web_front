@@ -1,7 +1,6 @@
 hr {
   height: 3px;
   background-color: black;
-
 }
 
 .boleto {
@@ -38,4 +37,20 @@ tr:nth-of-type(odd){
 
 .header {
   text-align: center;
+}
+#total{
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  padding: 0 1rem;
+}
+#totaltext{
+  width: 60%;
+  margin: 0;
+  padding: 0;
+}
+#cajero{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
 }
