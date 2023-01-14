@@ -98,7 +98,7 @@ export class VentasRegisterComponent implements OnInit {
       stock: [detalle.stock, []],
       precio_total: [0, []],
     });
-    debugger;
+    
   }
 
   obetenerUsuario() {

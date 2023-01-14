@@ -51,15 +51,17 @@ export class ProductoRegisterComponent implements OnInit {
   }
 
   get f() { return this.myForm.controls; }
-
+ 
   ngOnInit(): void {
     /*FIXME: SET VALUE TRAE ERRORES CUANDO LOS ATRIBUTOS NO COINCIDEN AL 100% */
     //this.myForm.setValue(this.estado);
     this.myForm.patchValue(this.producto);
     this.categoriagetall();
     this.proveedorgetall();
+    
   }
-
+  
+  
   proveedorgetall(){
     this._proveedorservice.getAll().subscribe(data=>{
       this.proveedor=data;
@@ -74,14 +76,13 @@ export class ProductoRegisterComponent implements OnInit {
   closeModal(res: boolean) {
     this.closeModalEmmit.emit(res);
   }
-
+  
   save()
   {
     /*FIXME: SI POR A O B, TENEMOS UN CAMPO DES-HABILITADO DESDE ANGULAR / NO TRAE ESE VALOR */
     //this.estado = this.myForm.value();
-    
+   
     this.producto = this.myForm.getRawValue();
-    debugger;
     if(this.producto.idProducto == 0)
     {
       this.createProducto();
