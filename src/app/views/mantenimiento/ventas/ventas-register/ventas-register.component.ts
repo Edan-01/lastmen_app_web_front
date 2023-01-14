@@ -159,7 +159,7 @@ export class VentasRegisterComponent implements OnInit {
   }
 
   createVentas() {
-    debugger;
+    
     this._ventasService.create(this.ventas).subscribe(
       (data: VentasModel) => {
         // alert("Registro creado de forma satisfactoría");

@@ -6,6 +6,7 @@ import{CategoriaService} from'src/app/service/categoria.service';
 import{ProveedorService} from'src/app/service/proveedor.service';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class ProductoRegisterComponent implements OnInit {
   @Output() closeModalEmmit = new EventEmitter<boolean>();
 
   myForm: FormGroup;
-
+  pipe = new DatePipe('en-US');
   categoria$!:Observable<any[]>;
   categoria:any=[];
   proveedor$!:Observable<any[]>;
@@ -94,8 +95,11 @@ export class ProductoRegisterComponent implements OnInit {
 
   createProducto()
   {
-    debugger;
-    this._productoService.create(this.producto).subscribe(
+    let product: any = this.myForm.value;
+    
+    product.fechaIngreso = this.pipe.transform(Date.now(), 'dd/MM/yyyy');
+    
+    this._productoService.create(product).subscribe(
       (data:ProductoModel)=>{
         //alert("Registro creado de forma satisfactoría");
         Swal.fire({
