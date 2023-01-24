@@ -191,7 +191,8 @@
                     <td>
                       <input
                         (input)="changerValueFormArray(i)"
-                        type="number"                        
+                        type="number"
+                        min="1"                        
                         class="form-control"
                         formControlName="cantidad"
                       />
@@ -208,6 +209,7 @@
                       <input
                         (input)="changerValueFormArray(i)"
                         type="number"
+                        min="0"
                         class="form-control"
                         formControlName="descuento"
                       />

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  uri_back_end:"https://localhost:7047/api/"
+  uri_back_end:"http://lastpro-001-site1.btempurl.com/api/"
 };
 
 /*

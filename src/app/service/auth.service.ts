@@ -7,7 +7,7 @@ import { LoginRequestModel } from '../models/common/login-request.model';
 })
 export class AuthService {
 
-  urlback = "https://localhost:7047/api/auth/";
+  urlback = "http://lastpro-001-site1.btempurl.com/api/Auth";
   constructor(
     private http: HttpClient
   ) { }
