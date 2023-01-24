@@ -38,6 +38,7 @@ export class VentasRegisterComponent implements OnInit {
   modalRef?: BsModalRef;
   myForm: FormGroup;
   // cliente
+  formNewClienteVenta = new FormGroup({});
   clienteSelect: ClienteModel = new ClienteModel();
   clienteList: ClienteModel[] = [];
   //producto
@@ -45,10 +46,17 @@ export class VentasRegisterComponent implements OnInit {
   productoselect: ProductoModel = new ProductoModel();
   //usuario
   usuario: any = {};
+
+  stock: number = 100;
+  descuento: number = 100;
   total_price: number = 0;
   productoseleccionados: ProductoModel[] = [];
   tituloModal: string = '';
   miVenta: VentasModel = new VentasModel();
+  
+  vuelto: number = 0;
+  pagar_con!: number;
+
   constructor(
     private modalService: BsModalService,
     private _sesionSevice: SesionService,
@@ -204,7 +212,7 @@ export class VentasRegisterComponent implements OnInit {
       let detalleVenta: DetalleVentaModel;
       detalleVenta = new DetalleVentaModel();
       detalleVenta.stock = producto.cantidad;
-      detalleVenta.cantidad = 1;
+      detalleVenta.cantidad = 0;
       detalleVenta.descuento = 0;
       detalleVenta.idDetalleCompra = 0;
       detalleVenta.idProducto = producto.idProducto;
@@ -213,9 +221,8 @@ export class VentasRegisterComponent implements OnInit {
       detalleVenta.descripcion_producto = producto.descripcion;
       detalleVenta.precio_unitario = producto.precioVenta;
       this.DetalleVentas.push(this.newVentaArray(detalleVenta));
-        e.target.disabled = true
-        
-      
+        e.target.disabled = true;
+      this.stock = detalleVenta.stock;
     }
   }
   removeElement(i: number) {
@@ -234,6 +241,31 @@ export class VentasRegisterComponent implements OnInit {
     let obj_1: DetalleVentaModel;
     obj_1 = new DetalleVentaModel();
     obj_1 = this.DetalleVentas.controls[i].value;
+
+    let producto_id = this.DetalleVentas.controls[i].get('idProducto')!.value;
+    let stock = this.producto.find(x => x.idProducto === producto_id)!.cantidad;
+
+    // Validación de cantidad ingresada en relación al stock disponible
+    if (obj_1.cantidad > stock) {
+      alert("La cantidad ingresada es mayor al stock disponible");
+      obj_1.cantidad = stock;
+      this.DetalleVentas.controls[i].get('cantidad')!.setValue(obj_1.cantidad);
+    }
+    else if (obj_1.cantidad <= 0) {
+      alert("La cantidad ingresada debe ser mayor a 0");
+      obj_1.cantidad = 1;
+      this.DetalleVentas.controls[i].get('cantidad')!.setValue(obj_1.cantidad);
+    }
+    else if (obj_1.descuento > (obj_1.cantidad * obj_1.precio_unitario)/2) {
+      alert("No puede descontar más de la mitad del producto");
+      obj_1.descuento = (obj_1.cantidad * obj_1.precio_unitario)/2;
+      this.DetalleVentas.controls[i].get('descuento')!.setValue(obj_1.descuento);
+    }
+    else if (obj_1.descuento < 0) {
+      alert("El descuento ingresado debe ser mayor a 0");
+      obj_1.descuento = 0;
+      this.DetalleVentas.controls[i].get('descuento')!.setValue(obj_1.descuento);
+    }
     let precio_total = obj_1.cantidad * obj_1.precio_unitario - obj_1.descuento;
 
     let obj = this.DetalleVentas.controls[i]
@@ -246,6 +278,39 @@ export class VentasRegisterComponent implements OnInit {
     detalles.forEach((x) => {
       this.total_price = this.total_price + x.precio_total;
     });
+  }
+
+  calcularVuelto(event: any, total_price: number) {
+    this.pagar_con = parseFloat(event.target.value);
+    if (this.pagar_con === parseFloat("") || isNaN(this.pagar_con) || this.pagar_con === null) {
+      this.vuelto = 0;
+    } else if (this.pagar_con < total_price) {
+        alert("El monto a pagar es menor al precio total");
+        this.vuelto = 0;
+    } else {
+      this.vuelto = this.pagar_con - total_price;
+    }
+  }
+
+  limpiarTablas() {
+    // limpia todos los elementos del formArray
+    const form = document.getElementById("form_new_cliente_venta") as HTMLFormElement;
+    // Limpiar los campos del formulario
+    form.reset();
+    // Limpiar las variables de cliente seleccionado
+    this.clienteSelect = {
+        idCliente: 0,
+        nombres: '',
+        apellidos: '',
+        dni: '',
+        direccion: '',
+        celular: ''
+    }
+    while (this.DetalleVentas.length !== 0) {
+        this.DetalleVentas.removeAt(0);
+    }
+    // reinicia el contador de total_price
+    this.total_price = 0;
   }
 
   realizarVenta(template: TemplateRef<any>) {
@@ -276,6 +341,7 @@ export class VentasRegisterComponent implements OnInit {
       this.tituloModal = 'COMPROBANTE DE PAGO';
       this.openModal(template);
     }, 2000);
+    this.limpiarTablas();
   }
 
   listVenta(template: TemplateRef<any>) {

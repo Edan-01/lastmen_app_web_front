@@ -11,15 +11,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let d of ventas,let indice=index">
-        <td>{{ indice + 1 }}</td>
-        <td hidden>{{ d.idVenta }} </td>
+      <tr *ngFor="let d of ventas.slice().reverse() | paginate: { itemsPerPage: 10, currentPage: page }; let i = index">
+        <!-- <td>{{ ventas.length - i  - ((page-1) * itemsPerPage) }}</td> -->
+        <td >{{ i + 1 }}</td>
+        <td hidden>{{ d.idVenta }}</td>
         <td>{{ usuarioTipoMap.get(d.idUsuario) }}</td>
         <td>{{ clienteTipoMap.get(d.idCliente) }}</td>
         <td>{{ d.fecha }}</td>
         <td>{{ d.tipoComprobante}}</td>
-      </tr>
+    </tr>
     </tbody>
   </table>
 </div>
-
+<pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente">
+</pagination-controls>

@@ -3,7 +3,8 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { DetalleVentaModel } from 'src/app/models/detalleVentas.model';
 import { detalleventaService } from 'src/app/service/detalleventa.service';
 import {ProductoService} from'src/app/service/producto.service';
-import {ClientesService} from'src/app/service/clientes.service';
+import { VentasService } from 'src/app/service/ventas.service';
+import { VentasModel } from 'src/app/models/ventas.model';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -15,6 +16,7 @@ export class detalleVentaListComponent implements OnInit {
   modalRef?: BsModalRef;
   detalleVenta:DetalleVentaModel[] = [];
   detalleVentaSelected:DetalleVentaModel = new DetalleVentaModel();
+  ventas: VentasModel[] = [];
   
   tituloModal:string = "";
   detalleExport: any = [];
@@ -28,19 +30,26 @@ export class detalleVentaListComponent implements OnInit {
   ];
   productoTiplist$!:Observable<any[]>;
   productoTiplist:any=[];
-  productoTipoMap:Map<number,string>=new Map()
-  page =0;
+  productoTipoMap:Map<number,string>=new Map();
+
+  page = 0;
+  ventaMap = new Map();
+  clienteMap = new Map();
+  // itemsPerPage = 10;
   constructor(
     private _detalleVentaservice:detalleventaService,
     private _productoService:ProductoService,
+    private _ventasService:VentasService,
     public modalService: BsModalService
   ) { }
 
   ngOnInit(): void {
+    this.getVentasInfo();
     this.getAllDetalleVenta();
     this.productoTiplist$=this._productoService.getAll();
     this.refreshProductotipoMap();
   }
+
   refreshProductotipoMap(){
     this._productoService.getAll().subscribe(data=>{
       this.productoTiplist=data;
@@ -73,12 +82,31 @@ export class detalleVentaListComponent implements OnInit {
       }
     );
   }
+
+
+  getVentasInfo()
+  {
+    this._ventasService.getAll().subscribe(
+      (data:VentasModel[]) => {
+        this.ventas = data;
+        console.log(data);
+        this.ventaMap = new Map();
+        for (let venta of this.ventas) {
+          this.ventaMap.set(venta.idVenta, venta);
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+
   getAllDetalleVenta()
   {
     this._detalleVentaservice.getAll().subscribe(
       (data:DetalleVentaModel[]) => {
         this.detalleVenta = data;
-        console.log(data);
+        console.log(data);        
       },
       err => {
         console.log(err);

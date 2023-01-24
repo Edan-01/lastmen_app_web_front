@@ -10,15 +10,17 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-ventas-list',
   templateUrl: './ventas-list.component.html',
-  styleUrls: ['./ventas-list.component.css']
+  styleUrls: ['./ventas-list.component.css'],
 })
 
 export class VentasListComponent implements OnInit {
   modalRef?: BsModalRef;
   filtro='';
+  page = 0;
   ventas:VentasModel[] = [];
   ventasSelected:VentasModel = new VentasModel();
   tituloModal:string = "";
+  // itemsPerPage = 10;
 
   clienteTiplist$!:Observable<any[]>;
   clienteTiplist:any=[];
@@ -27,6 +29,7 @@ export class VentasListComponent implements OnInit {
   usuarioTiplist$!:Observable<any[]>;
   usuarioTiplist:any=[];
   usuarioTipoMap:Map<number,string>=new Map()
+
   constructor(
     private _clienteservice:ClientesService,
     private _usuarioservice:UsuarioService,
@@ -69,6 +72,27 @@ export class VentasListComponent implements OnInit {
       }
     );
   }
+
+  
+  // getAllVentas() {
+  //   this._ventasService.getAll().subscribe(
+  //     (data: VentasModel[]) => {
+  //       this.ventas = data.sort((a, b) => {
+  //         if (a.fecha > b.fecha) {
+  //           return -1;
+  //         } else if (a.fecha < b.fecha) {
+  //           return 1;
+  //         } else {
+  //           return 0;
+  //         }
+  //       });
+  //       console.log(data);
+  //     },
+  //     err => {
+  //       console.log(err);
+  //     }
+  //   );
+  // }
 
   editarRegistro(ventas:VentasModel,template: TemplateRef<any>)
   {

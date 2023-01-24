@@ -4,7 +4,9 @@
         <tr>
           <th >#</th>
           <th hidden>ID DETALLE VENTA</th>
-          <th>VENTA</th>
+          <th>N° OPERACION</th>
+          <!-- <th>CLIENTE</th> -->
+          <th>FECHA VENTA</th>
           <th>PRODUCTO</th>
           <th>CANTIDAD</th>
           <th>PRECIO VENTA</th>
@@ -13,10 +15,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let d of detalleVenta,let indice=index">
-          <td >{{ indice+1 }}</td>
+        <tr *ngFor="let d of detalleVenta.slice().reverse()| paginate: { itemsPerPage: 10, currentPage: page },let i = index">
+          <td >{{ i + 1 }}</td>
           <td hidden>{{ d.idDetalleCompra }}</td>
           <td>{{ d.idVenta }}</td>
+          <!-- <td>{{ ventaMap.get(d.idVenta).idCliente }}</td> -->
+          <td>{{ ventaMap.get(d.idVenta).fecha }}</td>
           <td>{{ productoTipoMap.get(d.idProducto) }}</td>
           <td>{{ d.cantidad }}</td>
           <td>{{ d.precio_unitario | currency: "S/ "}}</td>
@@ -49,11 +53,7 @@
       
     </div>
   </ng-template>
-  
-  <!-- <pagination-controls  
-                      (pageChange)="page = $event"
-                      previousLabel="Anterior"
-                      nextLabel="Siguiente"
-                      >
-</pagination-controls> -->
+    
+  <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente">
+  </pagination-controls>
 
