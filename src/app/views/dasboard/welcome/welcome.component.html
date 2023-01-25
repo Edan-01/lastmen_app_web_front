@@ -2,13 +2,14 @@
     <img class="logo" src="../../../../assets/imagenes/logoLastmen.png" width="500px" alt="Logo Lastmen">
 </div>
 <div class="clock-container">
-    <div id="clock">
-      <h1 id="hours"></h1>
-      <h1 id="minutes"></h1>
-      <h1 id="seconds"></h1>
-    </div>
+  <div id="clock">
+    <h1>{{currentHours < 10 ? "0" + currentHours : currentHours}}<span>:</span></h1>
+    <h1>{{currentMinutes < 10 ? "0" + currentMinutes : currentMinutes}}<span>:</span></h1>
+    <h1>{{currentSeconds < 10 ? "0" + currentSeconds : currentSeconds}}</h1>
+    <h1 style="padding-left: 10px;">{{am_pm}}</h1>
   </div>
-  
+</div>
+
 
 
 

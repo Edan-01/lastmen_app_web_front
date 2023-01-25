@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       (data: any) => {
         this._sessionService.setVariableSesion(data.token, data.usuario);
 
-        this._router.navigate(["dashboard"]);
+        this._router.navigate(["dashboard/home"]);
       },
       err => {
         //alert("Contraseña y/o Usuario incorrecoto");

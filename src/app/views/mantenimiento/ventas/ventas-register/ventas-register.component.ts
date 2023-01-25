@@ -336,6 +336,7 @@
       }
       // reinicia el contador de total_price
       this.total_price = 0;
+      this.vuelto = 0;
     }
 
     realizarVenta(template: TemplateRef<any>) {

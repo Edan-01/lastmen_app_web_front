@@ -7,25 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent implements OnInit {
+  currentTime = new Date();
+  currentHours!: number;
+  currentMinutes!: number;
+  currentSeconds!: number;
+  am_pm!: string;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.updateClock();
     setInterval(() => {
-      this.updateClock();
+      this.currentTime = new Date();
+      this.currentHours = this.currentTime.getHours();
+      this.currentMinutes = this.currentTime.getMinutes();
+      this.currentSeconds = this.currentTime.getSeconds();
+      this.am_pm = this.currentHours >= 12 ? "p.m" : "a.m";
+      this.currentHours = this.currentHours % 12;
+      this.currentHours = this.currentHours ? this.currentHours : 12;
     }, 1000);
-  }
-
-  updateClock() {
-    var currentTime = new Date();
-    var currentHours = currentTime.getHours();
-    var currentMinutes = currentTime.getMinutes();
-    var currentSeconds = currentTime.getSeconds();
-
-    document.getElementById("hours")!.innerHTML = currentHours.toString();
-    document.getElementById("minutes")!.innerHTML = currentMinutes.toString();
-    document.getElementById("seconds")!.innerHTML = currentSeconds.toString();
   }
 }
 

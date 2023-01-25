@@ -8,36 +8,50 @@
   height: 100px;
 }
 
-/* Reloj */
-.clock-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 200px;
-  height: 80px;
-  background-color: #333;
-  color: #fff;
-  font-size: 40px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #ccc;
+/* Reloj */.clock-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 240px;
+    height: 80px;
+    background: linear-gradient(to top, #212529, #021b79);
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #ccc;
+    animation: clock-animation 1s ease-in-out infinite;
 }
 
 #clock {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #clock h1 {
-  margin: 0;
+    margin: 0;
+    animation: clock-animation 1s ease-in-out infinite;
 }
 
 #clock h1 span {
-  font-size: 20px;
+    font-size: 40px;
 }
+
+/* @keyframes clock-animation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+} */
