@@ -7,7 +7,7 @@ const routes: Routes = [
     path:'', component:LayoutComponent,
     children:[
       {
-        path:'', component:WelcomeComponent
+        path:'home', component:WelcomeComponent
       },
       {
         path:'mant',

@@ -2,49 +2,24 @@
   <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
     <div class="sb-sidenav-menu">
       <div class="nav">
-        <div class="sb-sidenav-menu-heading">Home</div>
-        <a class="nav-link" href="#">
+        <div class="sb-sidenav-menu-heading">Pagina Principal</div>
+        <a routerLink="home" class="nav-link" href="charts.html">
           <div class="sb-nav-link-icon">
-            <i class="fas fa-tachometer-alt"></i>
+            <i class="fas fa-home"></i>
           </div>
-          Home
+          Inicio  
         </a>
         <div class="sb-sidenav-menu-heading">Datos</div>
+        
         <a routerLink="mant/producto" class="nav-link" href="charts.html">
-          <div class="sb-nav-link-icon"><i class="fas fa-warehouse"></i></div>
+          <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>
           Almacen
         </a>
-        <a
-          class="nav-link collapsed"
-          href="#"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapseLayouts"
-          aria-expanded="false"
-          aria-controls="collapseLayouts"
-        >
-          <div class="sb-nav-link-icon"><i class="fas fa-wrench"></i></div>
-          Mantenimiento
-          <div class="sb-sidenav-collapse-arrow">
-            <i class="fas fa-angle-down"></i>
-          </div>
-        </a>
 
-        <div
-          class="collapse"
-          id="collapseLayouts"
-          aria-labelledby="headingOne"
-          data-bs-parent="#sidenavAccordion"
-        >
-          <nav class="sb-sidenav-menu-nested nav">
-            <a routerLink="mant/proveedor" class="nav-link" href="#"
-              >Proveedor</a
-            >
-            <a routerLink="mant/cliente" class="nav-link" href="#">Cliente</a>
-            <a routerLink="mant/categoria" class="nav-link" href="#"
-              >Categoria</a
-            >
-          </nav>
-        </div>
+        <a routerLink="mant/cliente" class="nav-link" href="charts.html">
+          <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+          Clientes
+        </a>
 
         <a
           class="nav-link collapsed"
@@ -70,10 +45,10 @@
         >
           <nav class="sb-sidenav-menu-nested nav">
             <a routerLink="mant/ventas" class="nav-link" href="#">
-              Realizar Venta
+              Generar Venta
             </a>
             <a routerLink="mant/detalleventas" class="nav-link" href="#">
-              Lista de Detalle Ventas
+              Lista Detalle Ventas
             </a>
           </nav>
         </div>
@@ -82,22 +57,35 @@
           class="nav-link collapsed"
           href="#"
           data-bs-toggle="collapse"
-          data-bs-target="#collapseling"
+          data-bs-target="#collapseLayouts"
           aria-expanded="false"
-          aria-controls="collapseling"
+          aria-controls="collapseLayouts"
         >
+          <div class="sb-nav-link-icon"><i class="fas fa-tools"></i></div>
+          Mantenimiento
+          <div class="sb-sidenav-collapse-arrow">
+            <i class="fas fa-angle-down"></i>
+          </div>
         </a>
+
         <div
           class="collapse"
-          id="collapseling"
+          id="collapseLayouts"
           aria-labelledby="headingOne"
           data-bs-parent="#sidenavAccordion"
-        ></div>
-
-        <div class="sb-sidenav-menu-heading">Administrador</div>
-        <a routerLink="mant/usuario" class="nav-link" href="charts.html">
-          <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-          Usuario
+        >
+          <nav class="sb-sidenav-menu-nested nav">
+            <a routerLink="mant/usuario" class="nav-link" href="#">Usuarios</a>
+            <a routerLink="mant/categoria" class="nav-link" href="#">Categorias</a>
+            <a routerLink="mant/proveedor" class="nav-link" href="#">Proveedores</a>
+          </nav>
+        </div>       
+        <div class="sb-sidenav-menu-heading">Cerrar Sesión</div>
+        <a class="nav-link" (click)="logout()">
+          <button style="background-color: transparent; border: 0px; color: peru;"> 
+            <i class="fas fa-sign-out-alt"></i> 
+            Salir
+          </button>  
         </a>
       </div>
     </div>
